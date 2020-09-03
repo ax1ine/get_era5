@@ -1,0 +1,74 @@
+object frmsettings: Tfrmsettings
+  Left = 483
+  Height = 160
+  Top = 223
+  Width = 609
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Settings'
+  ClientHeight = 160
+  ClientWidth = 609
+  OnClose = FormClose
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '2.0.2.0'
+  object GroupBox1: TGroupBox
+    Left = 16
+    Height = 64
+    Top = 8
+    Width = 576
+    Caption = 'CDS key'
+    ClientHeight = 44
+    ClientWidth = 572
+    TabOrder = 0
+    object eKey: TEdit
+      Left = 16
+      Height = 23
+      Top = 8
+      Width = 488
+      ParentFont = False
+      TabOrder = 0
+    end
+    object btnKey: TButton
+      Left = 512
+      Height = 23
+      Top = 8
+      Width = 48
+      Caption = 'Save'
+      OnClick = btnKeyClick
+      TabOrder = 1
+    end
+  end
+  object GroupBox5: TGroupBox
+    Left = 16
+    Height = 64
+    Top = 80
+    Width = 576
+    Caption = 'Python path'
+    ClientHeight = 44
+    ClientWidth = 572
+    TabOrder = 1
+    object ePythonPath: TEdit
+      Left = 16
+      Height = 23
+      Top = 8
+      Width = 488
+      OnChange = ePythonPathChange
+      ParentFont = False
+      TabOrder = 0
+    end
+    object btnPython: TButton
+      Left = 512
+      Height = 23
+      Top = 8
+      Width = 48
+      Caption = '...'
+      OnClick = btnPythonClick
+      TabOrder = 1
+    end
+  end
+  object OD: TOpenDialog
+    left = 80
+    top = 32
+  end
+end
