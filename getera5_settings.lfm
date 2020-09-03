@@ -1,74 +1,96 @@
 object frmsettings: Tfrmsettings
   Left = 483
-  Height = 160
+  Height = 445
   Top = 223
-  Width = 609
+  Width = 914
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Settings'
-  ClientHeight = 160
-  ClientWidth = 609
+  ClientHeight = 445
+  ClientWidth = 914
+  DesignTimePPI = 144
   OnClose = FormClose
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '2.0.2.0'
+  LCLVersion = '2.0.6.0'
   object GroupBox1: TGroupBox
-    Left = 16
-    Height = 64
-    Top = 8
-    Width = 576
+    Left = 24
+    Height = 96
+    Top = 12
+    Width = 864
     Caption = 'CDS key'
-    ClientHeight = 44
-    ClientWidth = 572
+    ClientHeight = 66
+    ClientWidth = 860
+    ParentFont = False
     TabOrder = 0
     object eKey: TEdit
-      Left = 16
-      Height = 23
-      Top = 8
-      Width = 488
+      Left = 24
+      Height = 33
+      Top = 12
+      Width = 732
       ParentFont = False
       TabOrder = 0
     end
     object btnKey: TButton
-      Left = 512
-      Height = 23
-      Top = 8
-      Width = 48
+      Left = 768
+      Height = 34
+      Top = 12
+      Width = 72
       Caption = 'Save'
       OnClick = btnKeyClick
+      ParentFont = False
       TabOrder = 1
     end
   end
   object GroupBox5: TGroupBox
-    Left = 16
-    Height = 64
-    Top = 80
-    Width = 576
-    Caption = 'Python path'
-    ClientHeight = 44
-    ClientWidth = 572
+    Left = 24
+    Height = 296
+    Top = 120
+    Width = 864
+    Caption = 'Python path and modules'
+    ClientHeight = 266
+    ClientWidth = 860
+    ParentFont = False
     TabOrder = 1
     object ePythonPath: TEdit
-      Left = 16
-      Height = 23
-      Top = 8
-      Width = 488
+      Left = 24
+      Height = 33
+      Top = 12
+      Width = 732
       OnChange = ePythonPathChange
       ParentFont = False
       TabOrder = 0
     end
     object btnPython: TButton
-      Left = 512
-      Height = 23
-      Top = 8
-      Width = 48
+      Left = 768
+      Height = 34
+      Top = 12
+      Width = 72
       Caption = '...'
       OnClick = btnPythonClick
+      ParentFont = False
       TabOrder = 1
+    end
+    object btnInstallPackages: TButton
+      Left = 568
+      Height = 34
+      Top = 64
+      Width = 272
+      Caption = 'Install/update cdsapi'
+      OnClick = btnInstallPackagesClick
+      TabOrder = 2
+    end
+    object Memo1: TMemo
+      Left = 24
+      Height = 127
+      Top = 120
+      Width = 816
+      ScrollBars = ssVertical
+      TabOrder = 3
     end
   end
   object OD: TOpenDialog
-    left = 80
-    top = 32
+    left = 120
+    top = 48
   end
 end

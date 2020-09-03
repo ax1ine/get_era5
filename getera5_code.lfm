@@ -125,7 +125,7 @@ object frmmain: Tfrmmain
           Width = 846
           BorderStyle = bsNone
           Columns = 10
-          ItemHeight = 38
+          ItemHeight = 0
           ParentFont = False
           TabOrder = 0
         end
@@ -254,7 +254,7 @@ object frmmain: Tfrmmain
           Width = 846
           BorderStyle = bsNone
           Columns = 10
-          ItemHeight = 38
+          ItemHeight = 0
           ParentFont = False
           TabOrder = 0
         end
@@ -276,7 +276,7 @@ object frmmain: Tfrmmain
           Width = 846
           BorderStyle = bsNone
           Columns = 6
-          ItemHeight = 38
+          ItemHeight = 0
           ParentFont = False
           TabOrder = 0
         end
@@ -298,7 +298,7 @@ object frmmain: Tfrmmain
           Width = 846
           BorderStyle = bsNone
           Columns = 12
-          ItemHeight = 38
+          ItemHeight = 0
           ParentFont = False
           TabOrder = 0
         end
@@ -320,7 +320,7 @@ object frmmain: Tfrmmain
           Width = 846
           BorderStyle = bsNone
           Columns = 8
-          ItemHeight = 38
+          ItemHeight = 0
           ParentFont = False
           TabOrder = 0
         end
@@ -380,8 +380,8 @@ object frmmain: Tfrmmain
     end
     object TabSheet4: TTabSheet
       Caption = 'Get data'
-      ClientHeight = 412
-      ClientWidth = 600
+      ClientHeight = 622
+      ClientWidth = 904
       ParentFont = False
       object mLog: TMemo
         Left = 15

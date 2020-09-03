@@ -1,4 +1,4 @@
-program dl_era5;
+program getera5;
 
 {$mode objfpc}{$H+}
 

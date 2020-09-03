@@ -70,9 +70,9 @@ type
     procedure GetVariablesSurface;
     procedure GetVariablesPressure;
     procedure ERA5GetScript;
-    procedure RunScript(cmd:string);
-  public
 
+  public
+    procedure RunScript(ExeFlag:integer; cmd:string; Sender:TMemo);
   end;
 
 resourcestring
@@ -96,6 +96,9 @@ resourcestring
 var
   frmmain: Tfrmmain;
   GlobalPath, IniFileName, ERA5Path: string;
+
+const
+  buf_len = 3000;
 
 implementation
 
@@ -492,57 +495,110 @@ begin
   mLog.Clear;
   ERA5GetScript;
 
-    RunScript(ERA5Path+'getera5.py');
+    RunScript(1, ERA5Path+'getera5.py', mLog);
   OpenDocument(ERA5Path);
 end;
 
 
 (* Launching scripts *)
-procedure Tfrmmain.RunScript(cmd:string);
+procedure Tfrmmain.RunScript(ExeFlag:integer; cmd:string; Sender:TMemo);
 Var
   Ini:TIniFile;
-  P: TProcess;
-  buf, s, ExeName: string;
+  P:TProcess;
+  ExeName, buf, s: string;
+  WaitOnExit:boolean;
   i, j: integer;
 begin
- Ini := TIniFile.Create(IniFileName);
+(*
+  ExeFlag = 0 /Random executable file
+  ExeFlag = 1 /Python
+  ExeFlag = 2 /Surfer
+  ExeFlag = 3 /Grapher
+  ExeFlag = 4 /CDO
+  ExeFlag = 5 /NCO
+*)
+
+{$IFDEF WINDOWS}
+  Ini := TIniFile.Create(IniFileName);
   try
-   ExeName:=Ini.ReadString('main', 'PythonPath', '');
-    if not FileExists(ExeName) then
-      if Messagedlg(SNoPython, mtwarning, [mbOk], 0)=mrOk then exit;
+    case ExeFlag of
+     0: begin
+        ExeName:='';
+        WaitOnExit:=false;
+     end;
+     1: begin
+        ExeName:=Ini.ReadString('main', 'PythonPath', '');
+        WaitOnExit:=false;
+        if not FileExists(ExeName) then
+           if Messagedlg(SNoPython, mtwarning, [mbOk], 0)=mrOk then exit;
+     end;
+   {  2: begin
+        ExeName:=Ini.ReadString('main', 'SurferPath',  '');
+        WaitOnExit:=true;
+        if not FileExists(ExeName) then
+           if Messagedlg(SNoSurfer, mtwarning, [mbOk], 0)=mrOk then exit;
+     end;
+     3: begin
+        ExeName:=Ini.ReadString('main', 'GrapherPath', '');
+        WaitOnExit:=true;
+        if not FileExists(ExeName) then
+           if Messagedlg(SNoGrapher, mtwarning, [mbOk], 0)=mrOk then exit;
+     end;
+     4: begin
+        ExeName:=GlobalSupportPath+PathDelim+'cdo'+PathDelim+'cdo.exe';
+       // showmessage(exename);
+        WaitOnExit:=true;
+        if not FileExists(ExeName) then
+           if Messagedlg(SNoCDO,    mtwarning, [mbOk], 0)=mrOk then exit;
+     end; }
+    end;
   finally
    ini.Free;
   end;
+{$ENDIF}
+
+{$IFDEF UNIX}
+  Case ExeFlag of
+    1: ExeName :='python3';
+    4: ExeName :='cdo';
+    5: ExeName :='nco';
+  end;
+{$ENDIF}
 
  try
   P:=TProcess.Create(Nil);
-  P.Commandline:=ExeName+' '+cmd;
-  P.Options:=[poUsePipes, poNoConsole, poStderrToOutPut];
+  P.Commandline:=trim(ExeName+' '+cmd);
+//  showmessage(P.CommandLine);
+  P.Options:= [poUsePipes, poNoConsole, poStderrToOutPut];
+
+  if WaitOnExit=true then P.Options:=P.Options+[poWaitOnExit];
   P.Execute;
 
   repeat
-     SetLength(buf, 3000);
-     SetLength(buf, p.output.Read(buf[1], length(buf))); //waits for the process output
-     // cut the incoming stream to lines:
-     s:=s + buf; //add to the accumulator
-     repeat //detect the line breaks and cut.
-       i:=Pos(#13, s);
-       j:=Pos(#10, s);
-       if i=0 then i:=j;
-       if j=0 then j:=i;
-       if j = 0 then Break; //there are no complete lines yet.
-         mLog.Lines.Add(Copy(s, 1, min(i, j) - 1)); //return the line without the CR/LF characters
-         Application.ProcessMessages;
-       s:=Copy(s, max(i, j) + 1, length(s) - max(i, j)); //remove the line from accumulator
-     until false;
-   until buf = '';
-   if (s <> '') then begin
-     mLog.Lines.Add(s);
-     Application.ProcessMessages;
-   end;
-  finally
-   P.Free;
-  end;
+   SetLength(buf, buf_len);
+   SetLength(buf, p.output.Read(buf[1], length(buf))); //waits for the process output
+   // cut the incoming stream to lines:
+   s:=s + buf; //add to the accumulator
+   repeat //detect the line breaks and cut.
+     i:=Pos(#13, s);
+     j:=Pos(#10, s);
+     if i=0 then i:=j;
+     if j=0 then j:=i;
+     if j = 0 then Break; //there are no complete lines yet.
+     if (Sender<> nil) then begin
+       Sender.Lines.Add(Copy(s, 1, min(i, j) - 1)); //return the line without the CR/LF characters
+       Application.ProcessMessages;
+     end;
+     s:=Copy(s, max(i, j) + 1, length(s) - max(i, j)); //remove the line from accumulator
+   until false;
+ until buf = '';
+ if (s <> '') and (Sender<>nil) then begin
+   Sender.Lines.Add(s);
+   Application.ProcessMessages;
+ end;
+finally
+ P.Free;
+end;
 end;
 
 

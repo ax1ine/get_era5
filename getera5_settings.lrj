@@ -2,6 +2,7 @@
 {"hash":213582195,"name":"tfrmsettings.caption","sourcebytes":[83,101,116,116,105,110,103,115],"value":"Settings"},
 {"hash":127234441,"name":"tfrmsettings.groupbox1.caption","sourcebytes":[67,68,83,32,107,101,121],"value":"CDS key"},
 {"hash":366789,"name":"tfrmsettings.btnkey.caption","sourcebytes":[83,97,118,101],"value":"Save"},
-{"hash":106914392,"name":"tfrmsettings.groupbox5.caption","sourcebytes":[80,121,116,104,111,110,32,112,97,116,104],"value":"Python path"},
-{"hash":12558,"name":"tfrmsettings.btnpython.caption","sourcebytes":[46,46,46],"value":"..."}
+{"hash":6465171,"name":"tfrmsettings.groupbox5.caption","sourcebytes":[80,121,116,104,111,110,32,112,97,116,104,32,97,110,100,32,109,111,100,117,108,101,115],"value":"Python path and modules"},
+{"hash":12558,"name":"tfrmsettings.btnpython.caption","sourcebytes":[46,46,46],"value":"..."},
+{"hash":5860649,"name":"tfrmsettings.btninstallpackages.caption","sourcebytes":[73,110,115,116,97,108,108,47,117,112,100,97,116,101,32,99,100,115,97,112,105],"value":"Install/update cdsapi"}
 ]}

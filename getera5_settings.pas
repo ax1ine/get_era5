@@ -14,14 +14,17 @@ type
   Tfrmsettings = class(TForm)
     btnKey: TButton;
     btnPython: TButton;
+    btnInstallPackages: TButton;
     eKey: TEdit;
     ePythonPath: TEdit;
     GroupBox1: TGroupBox;
     GroupBox5: TGroupBox;
+    Memo1: TMemo;
     OD: TOpenDialog;
 
     procedure btnKeyClick(Sender: TObject);
     procedure btnPythonClick(Sender: TObject);
+    procedure btnInstallPackagesClick(Sender: TObject);
     procedure ePythonPathChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormShow(Sender: TObject);
@@ -103,6 +106,21 @@ begin
   Ini:=TIniFile.Create(IniFileName);
   Ini.WriteString('main', 'PythonPath', ePythonPath.Text);
   Ini.Free;
+end;
+
+procedure Tfrmsettings.btnInstallPackagesClick(Sender: TObject);
+Var
+ Ini:TIniFile;
+begin
+memo1.Clear;
+ Ini := TIniFile.Create(IniFileName);
+  try
+   Ini.WriteString ( 'main', 'PythonPath', ePythonPath.Text);
+  finally
+   Ini.Free;
+  end;
+
+  frmmain.RunScript(1, '-m pip install cdsapi', memo1);
 end;
 
 procedure Tfrmsettings.FormClose(Sender: TObject; var CloseAction: TCloseAction
