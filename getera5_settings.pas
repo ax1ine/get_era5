@@ -54,7 +54,8 @@ Var
   st:string;
 begin
   Ini:=TIniFile.Create(IniFileName);
-    ePythonPath.Text:=Ini.ReadString('main', 'PythonPath', '');
+    ePythonPath.Text:=Ini.ReadString('main', 'PythonPath',
+                      GlobalPath+'Python39'+PathDelim+'Python.exe');
   Ini.Free;
 
   if FileExists(GetUserDir+'.cdsapirc') then begin
