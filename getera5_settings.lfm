@@ -1,45 +1,35 @@
 object frmsettings: Tfrmsettings
   Left = 483
-  Height = 445
+  Height = 438
   Top = 223
-  Width = 914
+  Width = 913
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Settings'
-  ClientHeight = 445
-  ClientWidth = 914
+  ClientHeight = 438
+  ClientWidth = 913
   DesignTimePPI = 144
   OnClose = FormClose
   OnShow = FormShow
   Position = poScreenCenter
   LCLVersion = '2.0.6.0'
   object GroupBox1: TGroupBox
-    Left = 24
+    Left = 232
     Height = 96
-    Top = 12
-    Width = 864
-    Caption = 'CDS key'
+    Top = 16
+    Width = 656
+    Caption = 'API Key'
     ClientHeight = 66
-    ClientWidth = 860
+    ClientWidth = 652
     ParentFont = False
     TabOrder = 0
     object eKey: TEdit
       Left = 24
       Height = 33
       Top = 12
-      Width = 732
+      Width = 608
       ParentFont = False
       TabOrder = 0
-    end
-    object btnKey: TButton
-      Left = 768
-      Height = 34
-      Top = 12
-      Width = 72
-      Caption = 'Save'
-      OnClick = btnKeyClick
-      ParentFont = False
-      TabOrder = 1
     end
   end
   object GroupBox5: TGroupBox
@@ -56,16 +46,16 @@ object frmsettings: Tfrmsettings
       Left = 24
       Height = 33
       Top = 12
-      Width = 732
+      Width = 764
       OnChange = ePythonPathChange
       ParentFont = False
       TabOrder = 0
     end
     object btnPython: TButton
-      Left = 768
+      Left = 806
       Height = 34
-      Top = 12
-      Width = 72
+      Top = 11
+      Width = 34
       Caption = '...'
       OnClick = btnPythonClick
       ParentFont = False
@@ -87,6 +77,24 @@ object frmsettings: Tfrmsettings
       Width = 816
       ScrollBars = ssVertical
       TabOrder = 3
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 24
+    Height = 96
+    Top = 16
+    Width = 184
+    Caption = 'UID'
+    ClientHeight = 66
+    ClientWidth = 180
+    TabOrder = 2
+    object seUID: TSpinEdit
+      Left = 24
+      Height = 33
+      Top = 12
+      Width = 136
+      MaxValue = 999999999
+      TabOrder = 0
     end
   end
   object OD: TOpenDialog
