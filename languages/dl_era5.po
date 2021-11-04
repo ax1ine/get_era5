@@ -1,0 +1,219 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: getera5_code.sapr
+msgid "April"
+msgstr ""
+
+#: getera5_code.saug
+msgid "August"
+msgstr ""
+
+#: getera5_code.sdec
+msgid "December"
+msgstr ""
+
+#: getera5_code.sfeb
+msgid "February"
+msgstr ""
+
+#: getera5_code.sfileexists
+msgid "File exists. Rewrite anyway?"
+msgstr ""
+
+#: getera5_code.sjan
+msgid "January"
+msgstr ""
+
+#: getera5_code.sjul
+msgid "July"
+msgstr ""
+
+#: getera5_code.sjun
+msgid "Jun"
+msgstr ""
+
+#: getera5_code.smar
+msgid "March"
+msgstr ""
+
+#: getera5_code.smay
+msgid "May"
+msgstr ""
+
+#: getera5_code.snokey
+msgid "CDS key is not found. Please, input and save it"
+msgstr ""
+
+#: getera5_code.snopython
+msgid "Python is not found"
+msgstr ""
+
+#: getera5_code.snov
+msgid "November"
+msgstr ""
+
+#: getera5_code.soct
+msgid "October"
+msgstr ""
+
+#: getera5_code.sselectday
+msgid "Please, select at least one day"
+msgstr ""
+
+#: getera5_code.sselecthour
+msgid "Please, select at least one hour"
+msgstr ""
+
+#: getera5_code.sselectlevel
+msgid "Please, select at least one level"
+msgstr ""
+
+#: getera5_code.sselectmonth
+msgid "Please, select at least one month"
+msgstr ""
+
+#: getera5_code.sselectproduct
+msgid "Please, select at least one product"
+msgstr ""
+
+#: getera5_code.sselectvariable
+msgid "Please, select at least one variable"
+msgstr ""
+
+#: getera5_code.sselectyear
+msgid "Please, select at least one year"
+msgstr ""
+
+#: getera5_code.ssep
+msgid "September"
+msgstr ""
+
+#: tfrmmain.btndownload.caption
+msgid "Download"
+msgstr ""
+
+#: tfrmmain.btndownload.hint
+msgid "Download data"
+msgstr ""
+
+#: tfrmmain.btnscript.hint
+msgid "Show script"
+msgstr ""
+
+#: tfrmmain.btnsettings.caption
+msgctxt "tfrmmain.btnsettings.caption"
+msgid "Settings"
+msgstr ""
+
+#: tfrmmain.caption
+msgid "Get ERA5"
+msgstr ""
+
+#: tfrmmain.gbmonth.caption
+msgid "Month"
+msgstr ""
+
+#: tfrmmain.gbmonth1.caption
+msgid "Time"
+msgstr ""
+
+#: tfrmmain.gbmonth2.caption
+msgid "Day"
+msgstr ""
+
+#: tfrmmain.gbyear.caption
+msgid "Year"
+msgstr ""
+
+#: tfrmmain.groupbox12.caption
+msgid "Region"
+msgstr ""
+
+#: tfrmmain.groupbox2.caption
+msgid "Dataset"
+msgstr ""
+
+#: tfrmmain.groupbox3.caption
+msgid "Parameter [Units]"
+msgstr ""
+
+#: tfrmmain.groupbox4.caption
+msgid "Level, hPa"
+msgstr ""
+
+#: tfrmmain.lballdays.caption
+msgctxt "tfrmmain.lballdays.caption"
+msgid "Select All"
+msgstr ""
+
+#: tfrmmain.lballhours.caption
+msgctxt "tfrmmain.lballhours.caption"
+msgid "Select All"
+msgstr ""
+
+#: tfrmmain.lballlevels.caption
+msgctxt "tfrmmain.lballlevels.caption"
+msgid "Select All"
+msgstr ""
+
+#: tfrmmain.lballmonth.caption
+msgctxt "tfrmmain.lballmonth.caption"
+msgid "Select All"
+msgstr ""
+
+#: tfrmmain.lballparameters.caption
+msgctxt "tfrmmain.lballparameters.caption"
+msgid "Select All"
+msgstr ""
+
+#: tfrmmain.lballyears.caption
+msgctxt "tfrmmain.lballyears.caption"
+msgid "Select All"
+msgstr ""
+
+#: tfrmmain.rggrid.caption
+msgid "Grid"
+msgstr ""
+
+#: tfrmmain.rgstream.caption
+msgid "Product"
+msgstr ""
+
+#: tfrmmain.tabsheet1.caption
+msgid "Parameter"
+msgstr ""
+
+#: tfrmmain.tabsheet2.caption
+msgid "Level, Region and Grid"
+msgstr ""
+
+#: tfrmmain.tabsheet3.caption
+msgid "Date"
+msgstr ""
+
+#: tfrmmain.tabsheet4.caption
+msgid "Get data"
+msgstr ""
+
+#: tfrmsettings.btnkey.caption
+msgid "Save"
+msgstr ""
+
+#: tfrmsettings.btnpython.caption
+msgid "..."
+msgstr ""
+
+#: tfrmsettings.caption
+msgctxt "tfrmsettings.caption"
+msgid "Settings"
+msgstr ""
+
+#: tfrmsettings.groupbox1.caption
+msgid "CDS key"
+msgstr ""
+
+#: tfrmsettings.groupbox5.caption
+msgid "Python path"
+msgstr ""
+
