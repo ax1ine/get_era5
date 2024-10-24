@@ -46,10 +46,10 @@ object frmmain: Tfrmmain
     Height = 443
     Top = 168
     Width = 608
-    ActivePage = TabSheet4
+    ActivePage = TabSheet1
     Anchors = [akTop, akLeft, akBottom]
     Enabled = False
-    TabIndex = 3
+    TabIndex = 0
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Parameter'

@@ -16,7 +16,6 @@
       <XPManifest>
         <DpiAware Value="True"/>
       </XPManifest>
-      <Icon Value="0"/>
     </General>
     <i18n>
       <EnableI18N Value="True"/>
@@ -51,22 +50,22 @@
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
+        <Filename Value="getera5_parameters.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit1>
+      <Unit2>
         <Filename Value="getera5_code.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmmain"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit1>
-      <Unit2>
+      </Unit2>
+      <Unit3>
         <Filename Value="getera5_settings.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="frmsettings"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-      </Unit2>
-      <Unit3>
-        <Filename Value="getera5_parameters.pas"/>
-        <IsPartOfProject Value="True"/>
       </Unit3>
     </Units>
   </ProjectOptions>

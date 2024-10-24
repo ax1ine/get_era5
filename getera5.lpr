@@ -7,7 +7,7 @@ uses
   cthreads,
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms, lazcontrols, getera5_code, getera5_settings, getera5_parameters;
+  Forms, lazcontrols, getera5_code;
 
 {$R *.res}
 
