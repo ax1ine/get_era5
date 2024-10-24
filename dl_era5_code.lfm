@@ -1,0 +1,480 @@
+object frmmain: Tfrmmain
+  Left = 487
+  Height = 936
+  Top = 42
+  Width = 957
+  HorzScrollBar.Page = 624
+  HorzScrollBar.Range = 624
+  VertScrollBar.Page = 576
+  VertScrollBar.Range = 576
+  BorderIcons = [biSystemMenu, biMinimize]
+  Caption = 'Get ERA5'
+  ClientHeight = 936
+  ClientWidth = 957
+  DesignTimePPI = 144
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '2.0.6.0'
+  object GroupBox2: TGroupBox
+    Left = 24
+    Height = 110
+    Top = 12
+    Width = 780
+    Caption = 'Dataset'
+    ClientHeight = 80
+    ClientWidth = 776
+    TabOrder = 0
+    object cbDataset: TComboBox
+      Left = 24
+      Height = 33
+      Top = 15
+      Width = 732
+      ItemHeight = 25
+      Items.Strings = (
+        ''
+      )
+      OnChange = cbDatasetChange
+      ParentFont = False
+      Style = csDropDownList
+      TabOrder = 0
+    end
+  end
+  object PageControl1: TPageControl
+    Left = 24
+    Height = 660
+    Top = 252
+    Width = 912
+    ActivePage = TabSheet1
+    Enabled = False
+    TabIndex = 0
+    TabOrder = 1
+    object TabSheet1: TTabSheet
+      Caption = 'Parameter'
+      ClientHeight = 622
+      ClientWidth = 904
+      ParentFont = False
+      object GroupBox3: TGroupBox
+        Left = 12
+        Height = 576
+        Top = 12
+        Width = 864
+        Caption = 'Parameter [Units]'
+        ClientHeight = 546
+        ClientWidth = 860
+        ParentFont = False
+        TabOrder = 0
+        object cgParameter: TCheckListBox
+          Left = 6
+          Height = 492
+          Top = 48
+          Width = 846
+          BorderStyle = bsNone
+          Columns = 1
+          ItemHeight = 0
+          ParentFont = False
+          TabOrder = 0
+        end
+        object cgParamaterFilter: TListFilterEdit
+          Left = 6
+          Height = 33
+          Top = 0
+          Width = 846
+          ButtonWidth = 34
+          NumGlyphs = 1
+          MaxLength = 0
+          ParentFont = False
+          TabOrder = 1
+        end
+      end
+      object lbAllParameters: TLabel
+        Cursor = crHandPoint
+        Left = 804
+        Height = 25
+        Top = 588
+        Width = 71
+        Caption = 'Select All'
+        Font.Color = clNavy
+        Font.Style = [fsUnderline]
+        ParentColor = False
+        ParentFont = False
+        OnClick = lbAllParametersClick
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Level, Region and Grid'
+      ClientHeight = 412
+      ClientWidth = 600
+      ParentFont = False
+      object GroupBox4: TGroupBox
+        Left = 12
+        Height = 168
+        Top = 156
+        Width = 864
+        Caption = 'Level, hPa'
+        ClientHeight = 138
+        ClientWidth = 860
+        ParentFont = False
+        TabOrder = 0
+        object cgLevel: TCheckListBox
+          Left = 6
+          Height = 132
+          Top = 0
+          Width = 846
+          BorderStyle = bsNone
+          Columns = 10
+          ItemHeight = 0
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
+      object lbAllLevels: TLabel
+        Cursor = crHandPoint
+        Left = 804
+        Height = 15
+        Top = 324
+        Width = 48
+        Caption = 'Select All'
+        Font.Color = clNavy
+        Font.Style = [fsUnderline]
+        ParentColor = False
+        ParentFont = False
+        OnClick = lbAllLevelsClick
+      end
+      object GroupBox12: TGroupBox
+        Left = 12
+        Height = 134
+        Top = 12
+        Width = 372
+        Caption = 'Region'
+        ClientHeight = 104
+        ClientWidth = 368
+        ParentFont = False
+        TabOrder = 1
+        object seymin: TSpinEdit
+          Left = 144
+          Height = 23
+          Top = 48
+          Width = 87
+          MaxValue = 90
+          MinValue = -90
+          ParentFont = False
+          TabOrder = 0
+          Value = -90
+        end
+        object seymax: TSpinEdit
+          Left = 144
+          Height = 23
+          Top = 0
+          Width = 87
+          MaxValue = 90
+          MinValue = -90
+          ParentFont = False
+          TabOrder = 1
+          Value = 90
+        end
+        object sexmin: TSpinEdit
+          Left = 24
+          Height = 23
+          Top = 24
+          Width = 87
+          MaxValue = 180
+          MinValue = -180
+          ParentFont = False
+          TabOrder = 2
+          Value = -180
+        end
+        object sexmax: TSpinEdit
+          Left = 264
+          Height = 23
+          Top = 24
+          Width = 87
+          MaxValue = 180
+          MinValue = -180
+          ParentFont = False
+          TabOrder = 3
+          Value = 180
+        end
+      end
+      object rgGrid: TRadioGroup
+        Left = 408
+        Height = 134
+        Top = 12
+        Width = 468
+        AutoFill = True
+        Caption = 'Grid'
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclTopToBottomThenLeftToRight
+        ChildSizing.ControlsPerLine = 3
+        ClientHeight = 104
+        ClientWidth = 464
+        ColumnLayout = clVerticalThenHorizontal
+        Columns = 3
+        ItemIndex = 0
+        Items.Strings = (
+          '0.25'
+          '0.5'
+          '0.75'
+          '1.0'
+          '1.5'
+          '2.0'
+          '2.5'
+          '3.0'
+          '5.0'
+        )
+        ParentFont = False
+        TabOrder = 2
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Date'
+      ClientHeight = 409
+      ClientWidth = 598
+      ParentFont = False
+      object gbYear: TGroupBox
+        Left = 12
+        Height = 168
+        Top = 12
+        Width = 864
+        Caption = 'Year'
+        ClientHeight = 138
+        ClientWidth = 860
+        ParentFont = False
+        TabOrder = 0
+        object cgYear: TCheckListBox
+          Left = 6
+          Height = 132
+          Top = 0
+          Width = 846
+          BorderStyle = bsNone
+          Columns = 10
+          ItemHeight = 0
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
+      object gbMonth: TGroupBox
+        Left = 12
+        Height = 96
+        Top = 204
+        Width = 864
+        Caption = 'Month'
+        ClientHeight = 66
+        ClientWidth = 860
+        ParentFont = False
+        TabOrder = 1
+        object cgMonth: TCheckListBox
+          Left = 6
+          Height = 60
+          Top = 0
+          Width = 846
+          BorderStyle = bsNone
+          Columns = 6
+          ItemHeight = 0
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
+      object gbMonth2: TGroupBox
+        Left = 12
+        Height = 120
+        Top = 324
+        Width = 864
+        Caption = 'Day'
+        ClientHeight = 90
+        ClientWidth = 860
+        ParentFont = False
+        TabOrder = 2
+        object cgDay: TCheckListBox
+          Left = 6
+          Height = 86
+          Top = -2
+          Width = 846
+          BorderStyle = bsNone
+          Columns = 12
+          ItemHeight = 0
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
+      object gbMonth1: TGroupBox
+        Left = 12
+        Height = 120
+        Top = 468
+        Width = 864
+        Caption = 'Time'
+        ClientHeight = 90
+        ClientWidth = 860
+        ParentFont = False
+        TabOrder = 3
+        object cgTime: TCheckListBox
+          Left = 6
+          Height = 84
+          Top = 0
+          Width = 846
+          BorderStyle = bsNone
+          Columns = 8
+          ItemHeight = 0
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
+      object lbAllYears: TLabel
+        Cursor = crHandPoint
+        Left = 804
+        Height = 15
+        Top = 180
+        Width = 48
+        Caption = 'Select All'
+        Font.Color = clNavy
+        Font.Style = [fsUnderline]
+        ParentColor = False
+        ParentFont = False
+        OnClick = lbAllYearsClick
+      end
+      object lbAllMonth: TLabel
+        Cursor = crHandPoint
+        Left = 804
+        Height = 15
+        Top = 300
+        Width = 48
+        Caption = 'Select All'
+        Font.Color = clNavy
+        Font.Style = [fsUnderline]
+        ParentColor = False
+        ParentFont = False
+        OnClick = lbAllMonthClick
+      end
+      object lbAllDays: TLabel
+        Cursor = crHandPoint
+        Left = 804
+        Height = 15
+        Top = 444
+        Width = 48
+        Caption = 'Select All'
+        Font.Color = clNavy
+        Font.Style = [fsUnderline]
+        ParentColor = False
+        ParentFont = False
+        OnClick = lbAllDaysClick
+      end
+      object lbAllHours: TLabel
+        Cursor = crHandPoint
+        Left = 804
+        Height = 15
+        Top = 588
+        Width = 48
+        Caption = 'Select All'
+        Font.Color = clNavy
+        Font.Style = [fsUnderline]
+        ParentColor = False
+        ParentFont = False
+        OnClick = lbAllHoursClick
+      end
+    end
+    object TabSheet4: TTabSheet
+      Caption = 'Get data'
+      ClientHeight = 622
+      ClientWidth = 904
+      ParentFont = False
+      object mLog: TMemo
+        Left = 15
+        Height = 528
+        Top = 72
+        Width = 864
+        Lines.Strings = (
+          'mLog'
+        )
+        ParentFont = False
+        ScrollBars = ssBoth
+        TabOrder = 0
+      end
+      object btnScript: TBitBtn
+        Left = 672
+        Height = 36
+        Hint = 'Show script'
+        Top = 22
+        Width = 44
+        Enabled = False
+        Glyph.Data = {
+          36030000424D3603000000000000360000002800000010000000100000000100
+          18000000000000030000232E0000232E00000000000000000000FDFDFDF0E5D2
+          D9B87FD3AE6ACB9F50D3AE69D3AE69D3AE69D3AE69D3AD69D3AE69D3AE69D3AE
+          69D3AE6BE3CCA4FDFDFDF2E8D7C38F2ED9BA78DDC186CCA150D9BB7EDCC084DA
+          BC7DDABA7ADABA7ADABA7ADABA7ADABA7AD9B978CBA24CE6D2B0DBBD88DBBD7E
+          DDC188DEC289DDC188C99B49DABB7DE3CD9FE0C899E0C899E0CA99E0C899E0CA
+          99E3CCA1D9BB7CD7B578D0A961C38F2DC1902FC49233C79B44C59338D8B875EC
+          DFC3EAD9B7E9D9B7E9D9B7E9D9B7E9D7B7EDE0C5DBBE82D4B06EF7F2EAFFFFFF
+          FFFFFFFFFFFFF4EEE6CEA456DBC086F8F6F0F5EFE1F4EFE3F4EFE3F4EFE3F4EF
+          E3F9F5EED6B672DBBC86FDFDFDFDFFFFFFFFFFFFFFFFCDA45CD6B46ED3AF68D2
+          AC61D0A85AD0A85AD0A859D0A95BD3AE64D7B672C29130F2E8D7FDFDFDFEFEFF
+          FFFFFFE9D7BCCB9D47E1CB98FBFCFAF9F8F3F9F8F3FBF8F5F9F8F3FCFAFAF8F7
+          F1D3AD63D7B57EFDFDFDFDFDFDFFFFFFFEFFFFC29033D8B878E7D4ADE1CA9EE1
+          C998E1C998E1C998E1CA99E3CEA2D4B068C49237FFFFFFFDFDFDFDFDFDFFFFFF
+          C69946D5B26ADABE82E3CC9DE1C998DFC798E1C997E2CB9BE5D0A4E4CFA1C290
+          31FBFAFBFFFFFFFDFDFDFDFDFDE5D0B0CEA655E1CB9AFDFFFFFAFAF8F9F9F5FB
+          F9F7F9F9F5FCFBFAEFE1C8D3AD62D9BA84FFFFFFFEFFFFFDFDFDFDFDFDC5943E
+          DABA7AD7B673D5B16AD3AE65D4AF66D4AF67D4AF67D5B16AD8B876C18D2DFFFF
+          FFFFFFFFFDFFFFFDFDFDF7F1E8C28E2CDCBE83DABB7DDABB7DDCBE83D7B574D7
+          B876D6B674D8B674D7B877CFA55EFFFFFFFFFFFFFFFFFFF7F2E9F0E5D2C99D44
+          DCBF84DABB7DDABC7FDBC185BC8421CEA456CBA151CBA151CDA252C79C46C696
+          3BC1902FC18F2DD0A961F8F3EBC08B29DCBE82DABB7DDCBF83D1AA61D4B26DDE
+          C28ADCC085DCC085DCC085DCC085DCC085DDC188DBBD7EDBBD88FDFDFDC79A47
+          D9B977DCBF83DFC48CC59238DFC48CDCBF84DCBE83DCBE83DCBE83DCBE82DBBD
+          80D9B978C38E2EF2E8D7FDFDFDF8F4ECD8B67BD3AE69CB9F51D1AA63D3AE69D3
+          AE69D3AE69D3AE69D3AE69D3AE69D3AE6AD9B97EF0E5D2FDFDFD
+        }
+        OnClick = btnScriptClick
+        ParentFont = False
+        TabOrder = 1
+      end
+      object btnDownload: TButton
+        Left = 723
+        Height = 36
+        Hint = 'Download data'
+        Top = 22
+        Width = 156
+        Caption = 'Download'
+        Enabled = False
+        Font.Color = clWindowText
+        Font.Height = -17
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        OnClick = btnDownloadClick
+        ParentFont = False
+        TabOrder = 2
+      end
+    end
+  end
+  object rgStream: TRadioGroup
+    Left = 24
+    Height = 98
+    Top = 132
+    Width = 912
+    AutoFill = True
+    Caption = 'Product'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 2
+    Columns = 2
+    OnClick = rgStreamClick
+    TabOrder = 2
+  end
+  object btnSettings: TButton
+    Left = 824
+    Height = 38
+    Top = 51
+    Width = 112
+    Caption = 'Settings'
+    OnClick = btnSettingsClick
+    ParentFont = False
+    TabOrder = 3
+  end
+end
