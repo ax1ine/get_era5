@@ -1,76 +1,78 @@
 object frmmain: Tfrmmain
-  Left = 487
-  Height = 936
-  Top = 42
-  Width = 957
+  Left = 452
+  Height = 628
+  Top = 53
+  Width = 642
   HorzScrollBar.Page = 624
   HorzScrollBar.Range = 624
   VertScrollBar.Page = 576
   VertScrollBar.Range = 576
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Get ERA5'
-  ClientHeight = 936
-  ClientWidth = 957
-  DesignTimePPI = 144
+  ClientHeight = 628
+  ClientWidth = 642
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '2.0.6.0'
+  LCLVersion = '3.6.0.0'
   object GroupBox2: TGroupBox
-    Left = 24
-    Height = 110
-    Top = 12
-    Width = 780
+    Left = 16
+    Height = 73
+    Top = 8
+    Width = 520
     Caption = 'Dataset'
-    ClientHeight = 80
-    ClientWidth = 776
+    ClientHeight = 53
+    ClientWidth = 516
     TabOrder = 0
     object cbDataset: TComboBox
-      Left = 24
-      Height = 33
-      Top = 15
-      Width = 732
-      ItemHeight = 25
+      Left = 16
+      Height = 23
+      Top = 10
+      Width = 488
+      ItemHeight = 15
       Items.Strings = (
-        'ERA5 monthly averaged data on single levels from 1979 to present'
-        'ERA5 monthly averaged data on pressure levels from 1979 to present'
-        'ERA5 hourly data on single levels from 1979 to present'
-        'ERA5 hourly data on pressure levels from 1979 to present'
+        'ERA5 monthly averaged data on single levels'
+        'ERA5 monthly averaged data on pressure levels'
+        'ERA5 hourly data on single levels'
+        'ERA5 hourly data on pressure levels'
       )
-      OnChange = cbDatasetChange
       ParentFont = False
       Style = csDropDownList
       TabOrder = 0
+      OnChange = cbDatasetChange
     end
   end
   object PageControl1: TPageControl
-    Left = 24
-    Height = 660
-    Top = 252
-    Width = 912
-    ActivePage = TabSheet1
+    Left = 16
+    Height = 443
+    Top = 168
+    Width = 608
+    ActivePage = TabSheet4
+    Anchors = [akTop, akLeft, akBottom]
     Enabled = False
-    TabIndex = 0
+    TabIndex = 3
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Parameter'
-      ClientHeight = 622
-      ClientWidth = 904
+      ClientHeight = 415
+      ClientWidth = 600
       ParentFont = False
       object GroupBox3: TGroupBox
-        Left = 12
-        Height = 576
-        Top = 12
-        Width = 864
+        Left = 8
+        Height = 383
+        Top = 8
+        Width = 576
+        Anchors = [akTop, akLeft, akBottom]
         Caption = 'Parameter [Units]'
-        ClientHeight = 546
-        ClientWidth = 860
+        ClientHeight = 363
+        ClientWidth = 572
         ParentFont = False
         TabOrder = 0
         object cgParameter: TCheckListBox
-          Left = 6
-          Height = 492
-          Top = 48
-          Width = 846
+          Left = 4
+          Height = 327
+          Top = 32
+          Width = 564
+          Anchors = [akTop, akLeft, akBottom]
           BorderStyle = bsNone
           Columns = 1
           ItemHeight = 0
@@ -78,11 +80,11 @@ object frmmain: Tfrmmain
           TabOrder = 0
         end
         object cgParamaterFilter: TListFilterEdit
-          Left = 6
-          Height = 33
+          Left = 4
+          Height = 23
           Top = 0
-          Width = 846
-          ButtonWidth = 34
+          Width = 564
+          ButtonWidth = 23
           NumGlyphs = 1
           MaxLength = 0
           ParentFont = False
@@ -91,10 +93,11 @@ object frmmain: Tfrmmain
       end
       object lbAllParameters: TLabel
         Cursor = crHandPoint
-        Left = 804
-        Height = 25
-        Top = 588
-        Width = 71
+        Left = 536
+        Height = 15
+        Top = 391
+        Width = 48
+        Anchors = [akLeft, akBottom]
         Caption = 'Select All'
         Font.Color = clNavy
         Font.Style = [fsUnderline]
@@ -105,24 +108,24 @@ object frmmain: Tfrmmain
     end
     object TabSheet2: TTabSheet
       Caption = 'Level, Region and Grid'
-      ClientHeight = 412
+      ClientHeight = 415
       ClientWidth = 600
       ParentFont = False
       object GroupBox4: TGroupBox
-        Left = 12
-        Height = 168
-        Top = 156
-        Width = 864
+        Left = 8
+        Height = 112
+        Top = 104
+        Width = 576
         Caption = 'Level, hPa'
-        ClientHeight = 138
-        ClientWidth = 860
+        ClientHeight = 92
+        ClientWidth = 572
         ParentFont = False
         TabOrder = 0
         object cgLevel: TCheckListBox
-          Left = 6
-          Height = 132
+          Left = 4
+          Height = 88
           Top = 0
-          Width = 846
+          Width = 564
           BorderStyle = bsNone
           Columns = 10
           ItemHeight = 0
@@ -132,9 +135,9 @@ object frmmain: Tfrmmain
       end
       object lbAllLevels: TLabel
         Cursor = crHandPoint
-        Left = 804
+        Left = 536
         Height = 15
-        Top = 324
+        Top = 216
         Width = 48
         Caption = 'Select All'
         Font.Color = clNavy
@@ -144,20 +147,20 @@ object frmmain: Tfrmmain
         OnClick = lbAllLevelsClick
       end
       object GroupBox12: TGroupBox
-        Left = 12
-        Height = 134
-        Top = 12
-        Width = 372
+        Left = 8
+        Height = 89
+        Top = 8
+        Width = 248
         Caption = 'Region'
-        ClientHeight = 104
-        ClientWidth = 368
+        ClientHeight = 69
+        ClientWidth = 244
         ParentFont = False
         TabOrder = 1
         object seymin: TSpinEdit
-          Left = 144
+          Left = 96
           Height = 23
-          Top = 48
-          Width = 87
+          Top = 32
+          Width = 58
           MaxValue = 90
           MinValue = -90
           ParentFont = False
@@ -165,10 +168,10 @@ object frmmain: Tfrmmain
           Value = -90
         end
         object seymax: TSpinEdit
-          Left = 144
+          Left = 96
           Height = 23
           Top = 0
-          Width = 87
+          Width = 58
           MaxValue = 90
           MinValue = -90
           ParentFont = False
@@ -176,10 +179,10 @@ object frmmain: Tfrmmain
           Value = 90
         end
         object sexmin: TSpinEdit
-          Left = 24
+          Left = 16
           Height = 23
-          Top = 24
-          Width = 87
+          Top = 16
+          Width = 58
           MaxValue = 180
           MinValue = -180
           ParentFont = False
@@ -187,10 +190,10 @@ object frmmain: Tfrmmain
           Value = -180
         end
         object sexmax: TSpinEdit
-          Left = 264
+          Left = 176
           Height = 23
-          Top = 24
-          Width = 87
+          Top = 16
+          Width = 58
           MaxValue = 180
           MinValue = -180
           ParentFont = False
@@ -199,10 +202,10 @@ object frmmain: Tfrmmain
         end
       end
       object rgGrid: TRadioGroup
-        Left = 408
-        Height = 134
-        Top = 12
-        Width = 468
+        Left = 272
+        Height = 89
+        Top = 8
+        Width = 312
         AutoFill = True
         Caption = 'Grid'
         ChildSizing.LeftRightSpacing = 6
@@ -212,8 +215,8 @@ object frmmain: Tfrmmain
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclTopToBottomThenLeftToRight
         ChildSizing.ControlsPerLine = 3
-        ClientHeight = 104
-        ClientWidth = 464
+        ClientHeight = 69
+        ClientWidth = 308
         ColumnLayout = clVerticalThenHorizontal
         Columns = 3
         ItemIndex = 0
@@ -234,46 +237,75 @@ object frmmain: Tfrmmain
     end
     object TabSheet3: TTabSheet
       Caption = 'Date'
-      ClientHeight = 409
-      ClientWidth = 598
+      ClientHeight = 415
+      ClientWidth = 600
       ParentFont = False
       object gbYear: TGroupBox
-        Left = 12
-        Height = 168
-        Top = 12
-        Width = 864
+        Left = 8
+        Height = 376
+        Top = 8
+        Width = 256
+        Anchors = [akTop, akLeft, akBottom]
         Caption = 'Year'
-        ClientHeight = 138
-        ClientWidth = 860
+        ClientHeight = 356
+        ClientWidth = 252
         ParentFont = False
         TabOrder = 0
         object cgYear: TCheckListBox
-          Left = 6
-          Height = 132
+          Left = 0
+          Height = 356
           Top = 0
-          Width = 846
+          Width = 252
+          Align = alClient
+          Anchors = [akTop, akLeft, akBottom]
           BorderStyle = bsNone
-          Columns = 10
+          Columns = 5
           ItemHeight = 0
           ParentFont = False
           TabOrder = 0
         end
       end
       object gbMonth: TGroupBox
-        Left = 12
+        Left = 280
         Height = 96
-        Top = 204
-        Width = 864
+        Top = 8
+        Width = 304
         Caption = 'Month'
-        ClientHeight = 66
-        ClientWidth = 860
+        ClientHeight = 76
+        ClientWidth = 300
         ParentFont = False
         TabOrder = 1
         object cgMonth: TCheckListBox
-          Left = 6
-          Height = 60
+          Left = 0
+          Height = 76
           Top = 0
-          Width = 846
+          Width = 300
+          Align = alClient
+          Anchors = [akLeft]
+          BorderStyle = bsNone
+          Columns = 3
+          ItemHeight = 0
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
+      object gbMonth2: TGroupBox
+        Left = 280
+        Height = 128
+        Top = 120
+        Width = 304
+        Caption = 'Day'
+        ClientHeight = 108
+        ClientWidth = 300
+        ParentFont = False
+        TabOrder = 2
+        object cgDay: TCheckListBox
+          Left = 0
+          Height = 108
+          Top = 0
+          Width = 300
+          Align = alClient
+          Anchors = [akLeft]
           BorderStyle = bsNone
           Columns = 6
           ItemHeight = 0
@@ -281,45 +313,25 @@ object frmmain: Tfrmmain
           TabOrder = 0
         end
       end
-      object gbMonth2: TGroupBox
-        Left = 12
-        Height = 120
-        Top = 324
-        Width = 864
-        Caption = 'Day'
-        ClientHeight = 90
-        ClientWidth = 860
-        ParentFont = False
-        TabOrder = 2
-        object cgDay: TCheckListBox
-          Left = 6
-          Height = 86
-          Top = -2
-          Width = 846
-          BorderStyle = bsNone
-          Columns = 12
-          ItemHeight = 0
-          ParentFont = False
-          TabOrder = 0
-        end
-      end
       object gbMonth1: TGroupBox
-        Left = 12
+        Left = 280
         Height = 120
-        Top = 468
-        Width = 864
+        Top = 264
+        Width = 304
         Caption = 'Time'
-        ClientHeight = 90
-        ClientWidth = 860
+        ClientHeight = 100
+        ClientWidth = 300
         ParentFont = False
         TabOrder = 3
         object cgTime: TCheckListBox
-          Left = 6
-          Height = 84
+          Left = 0
+          Height = 100
           Top = 0
-          Width = 846
+          Width = 300
+          Align = alClient
+          Anchors = [akLeft]
           BorderStyle = bsNone
-          Columns = 8
+          Columns = 6
           ItemHeight = 0
           ParentFont = False
           TabOrder = 0
@@ -327,10 +339,11 @@ object frmmain: Tfrmmain
       end
       object lbAllYears: TLabel
         Cursor = crHandPoint
-        Left = 804
+        Left = 8
         Height = 15
-        Top = 180
+        Top = 384
         Width = 48
+        Anchors = [akLeft, akBottom]
         Caption = 'Select All'
         Font.Color = clNavy
         Font.Style = [fsUnderline]
@@ -340,9 +353,9 @@ object frmmain: Tfrmmain
       end
       object lbAllMonth: TLabel
         Cursor = crHandPoint
-        Left = 804
+        Left = 280
         Height = 15
-        Top = 300
+        Top = 104
         Width = 48
         Caption = 'Select All'
         Font.Color = clNavy
@@ -353,9 +366,9 @@ object frmmain: Tfrmmain
       end
       object lbAllDays: TLabel
         Cursor = crHandPoint
-        Left = 804
+        Left = 280
         Height = 15
-        Top = 444
+        Top = 248
         Width = 48
         Caption = 'Select All'
         Font.Color = clNavy
@@ -366,9 +379,9 @@ object frmmain: Tfrmmain
       end
       object lbAllHours: TLabel
         Cursor = crHandPoint
-        Left = 804
+        Left = 280
         Height = 15
-        Top = 588
+        Top = 384
         Width = 48
         Caption = 'Select All'
         Font.Color = clNavy
@@ -380,14 +393,15 @@ object frmmain: Tfrmmain
     end
     object TabSheet4: TTabSheet
       Caption = 'Get data'
-      ClientHeight = 622
-      ClientWidth = 904
+      ClientHeight = 415
+      ClientWidth = 600
       ParentFont = False
       object mLog: TMemo
-        Left = 15
-        Height = 528
-        Top = 72
-        Width = 864
+        Left = 10
+        Height = 351
+        Top = 48
+        Width = 576
+        Anchors = [akTop, akLeft, akBottom]
         Lines.Strings = (
           'mLog'
         )
@@ -396,11 +410,11 @@ object frmmain: Tfrmmain
         TabOrder = 0
       end
       object btnScript: TBitBtn
-        Left = 672
-        Height = 36
+        Left = 448
+        Height = 24
         Hint = 'Show script'
-        Top = 22
-        Width = 44
+        Top = 15
+        Width = 29
         Enabled = False
         Glyph.Data = {
           36030000424D3603000000000000360000002800000010000000100000000100
@@ -435,28 +449,28 @@ object frmmain: Tfrmmain
         TabOrder = 1
       end
       object btnDownload: TButton
-        Left = 723
-        Height = 36
+        Left = 482
+        Height = 24
         Hint = 'Download data'
-        Top = 22
-        Width = 156
+        Top = 15
+        Width = 104
         Caption = 'Download'
         Enabled = False
         Font.Color = clWindowText
-        Font.Height = -17
+        Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
-        OnClick = btnDownloadClick
         ParentFont = False
         TabOrder = 2
+        OnClick = btnDownloadClick
       end
     end
   end
   object rgStream: TRadioGroup
-    Left = 24
-    Height = 98
-    Top = 132
-    Width = 912
+    Left = 16
+    Height = 65
+    Top = 88
+    Width = 608
     AutoFill = True
     Caption = 'Product'
     ChildSizing.LeftRightSpacing = 6
@@ -471,13 +485,13 @@ object frmmain: Tfrmmain
     TabOrder = 2
   end
   object btnSettings: TButton
-    Left = 824
-    Height = 38
-    Top = 51
-    Width = 112
+    Left = 549
+    Height = 25
+    Top = 34
+    Width = 75
     Caption = 'Settings'
-    OnClick = btnSettingsClick
     ParentFont = False
     TabOrder = 3
+    OnClick = btnSettingsClick
   end
 end

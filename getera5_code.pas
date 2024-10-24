@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, FileUtil, ListFilterEdit, Forms, Controls, Graphics,
   Dialogs, StdCtrls, ExtCtrls, ComCtrls, Spin, Buttons, CheckLst, LCLIntf,
-  FileCtrl, Process, IniFiles, DateUtils, Math, getera5_settings;
+  Process, IniFiles, DateUtils, Math, LazFileUtils;
 
 type
 
@@ -104,15 +104,19 @@ implementation
 
 {$R *.lfm}
 
+uses getera5_settings, getera5_parameters;
+
 { Tfrmmain }
 
 procedure Tfrmmain.FormShow(Sender: TObject);
 Var
   Ini: TIniFile;
-  k: integer;
+  k, max_year: integer;
   yy, mn, dd: word;
 begin
  mLog.Clear; //clean the log memo
+
+ max_year := 1940;
 
   (* Define global path to the *.exe file *)
   GlobalPath:=ExtractFilePath(Application.ExeName);
@@ -132,14 +136,14 @@ begin
   if not DirectoryExists(GlobalPath+'data') then
      CreateDir(GlobalPath+'data');
 
-  ERA5Path:=GlobalPath+'data'+PathDelim+'era5'+PathDelim;
+  ERA5Path:=GlobalPath+'data'+PathDelim;
   if not DirectoryExists(ERA5Path) then CreateDir(ERA5Path);
 
   DecodeDate(now, yy, mn, dd);
 
-    for k:=1979 to yy do begin
+    for k:=max_year to yy do begin
      cgYear.Items.Add(InttoStr(k));
-     cgYear.Checked[k-1979]:=true;
+     cgYear.Checked[k-max_year]:=true;
     end;
 
     for k:=1 to 12 do begin
@@ -311,8 +315,16 @@ Var
   dat: text;
   k, fl: integer;
   e5year, e5month, e5day, e5hour, e5variable, e5area, e5grid, e5level:string;
-  e5reanalysis, e5product, par_str, mn_str, dd_str, grid_str: string;
+  e5reanalysis, e5product, par_str, mn_str, dd_str, grid_str, path_out: string;
+  st, final_script, stURL, stKEY: string;
 begin
+    AssignFile(dat, GetUserDir+'.cdsapirc'); reset(dat);
+     readln(dat, st);
+     stURL:=trim(copy(st, 5, length(st)));
+     readln(dat, st);
+     stKEY:=trim(copy(st, 5, length(st)));
+    CloseFile(dat);
+
   // reanalysis
   case cbDataset.ItemIndex of
    0: e5reanalysis:='reanalysis-era5-single-levels-monthly-means';
@@ -320,25 +332,27 @@ begin
    2: e5reanalysis:='reanalysis-era5-single-levels';
    3: e5reanalysis:='reanalysis-era5-pressure-levels';
   end;
-  e5reanalysis:=QuotedStr(e5reanalysis);
 
   // product type
   if rgStream.Items.Strings[rgStream.ItemIndex]='Monthly averaged ensemble members' then
-     e5product:=QuotedStr('members-monthly-means-of-daily-means');
+     e5product:='monthly_averaged_ensemble_members';
   if rgStream.Items.Strings[rgStream.ItemIndex]='Monthly averaged ensemble members by hour of day' then
-     e5product:=QuotedStr('members-synoptic-monthly-means');
+     e5product:='monthly_averaged_ensemble_members_by_hour_of_day';
   if rgStream.Items.Strings[rgStream.ItemIndex]='Monthly averaged reanalysis' then
-     e5product:=QuotedStr('reanalysis-monthly-means-of-daily-means');
+     e5product:='monthly_averaged_reanalysis';
   if rgStream.Items.Strings[rgStream.ItemIndex]='Monthly averaged reanalysis by hour of day' then
-     e5product:=QuotedStr('reanalysis-synoptic-monthly-means');
+     e5product:='monthly_averaged_reanalysis_by_hour_of_day';
+
   if rgStream.Items.Strings[rgStream.ItemIndex]='Ensemble mean' then
-     e5product:=QuotedStr('ensemble_mean');
+     e5product:='ensemble_mean';
   if rgStream.Items.Strings[rgStream.ItemIndex]='Ensemble members' then
-     e5product:=QuotedStr('ensemble_members');
+     e5product:='ensemble_members';
   if rgStream.Items.Strings[rgStream.ItemIndex]='Ensemble spread' then
-     e5product:=QuotedStr('ensemble_spread');
+     e5product:='ensemble_spread';
   if rgStream.Items.Strings[rgStream.ItemIndex]='Reanalysis' then
-     e5product:=QuotedStr('reanalysis');
+     e5product:='reanalysis';
+
+  e5product:='['+AnsiQuotedStr(e5product, '"')+']';
 
   // variables
   e5variable:=''; fl:=0;
@@ -348,28 +362,26 @@ begin
       par_str:=copy(par_str, 1, Pos('[', par_str)-2);
       par_str:=StringReplace(par_str, ' ', '_', [rfReplaceAll]);
       par_str:=StringReplace(par_str, '-', '_', [rfReplaceAll]);
-      e5variable:=e5variable+QuotedStr(par_str)+',';
+      e5variable:=e5variable+AnsiQuotedStr(par_str, '"')+',';
       inc(fl);
   end;
   if fl=0 then begin
    if MessageDlg(SSelectVariable, mtWarning, [mbOk], 0)=mrOk then exit;
   end else begin
-   e5variable:=Copy(e5variable,1, length(e5variable)-1);
-    if fl>1 then e5variable:='['+e5variable+']';
+   e5variable:='['+Copy(e5variable,1, length(e5variable)-1)+']';
   end;
 
   // levels
   e5level:=''; fl:=0;
   for k:=0 to cgLevel.Items.Count-1 do
     if cglevel.Checked[k]=true then begin
-      e5level:=e5level+QuotedStr(cgLevel.Items.Strings[k])+',';
+      e5level:=e5level+AnsiQuotedStr(cgLevel.Items.Strings[k], '"')+',';
       inc(fl);
   end;
   if fl=0 then begin
    if MessageDlg(SSelectLevel, mtWarning, [mbOk], 0)=mrOk then exit;
   end else begin
-   e5level:=Copy(e5level,1, length(e5level)-1);
-   if fl>1 then e5level:='['+e5level+']';
+   e5level:='['+Copy(e5level,1, length(e5level)-1)+']';
   end;
 
 
@@ -377,14 +389,13 @@ begin
   e5year:=''; fl:=0;
   for k:=0 to cgYear.Items.Count-1 do
     if cgYear.Checked[k]=true then begin
-      e5year:=e5year+QuotedStr(cgYear.Items.Strings[k])+',';
+      e5year:=e5year+AnsiQuotedStr(cgYear.Items.Strings[k], '"')+',';
       inc(fl);
   end;
   if fl=0 then begin
    if MessageDlg(SSelectYear, mtWarning, [mbOk], 0)=mrOk then exit;
   end else begin
-   e5year:=Copy(e5year,1, length(e5year)-1);
-   if fl>1 then e5year:='['+e5year+']';
+   e5year:='['+Copy(e5year,1, length(e5year)-1)+']';
   end;
 
 
@@ -394,14 +405,13 @@ begin
     if cgMonth.Checked[k]=true then begin
      mn_str:=InttoStr(k+1);
      if length(mn_str)<2 then mn_str:='0'+mn_str;
-      e5month:=e5month+QuotedStr(mn_str)+',';
+      e5month:=e5month+AnsiQuotedStr(mn_str, '"')+',';
       inc(fl);
   end;
   if fl=0 then begin
    if MessageDlg(SSelectMonth, mtWarning, [mbOk], 0)=mrOk then exit;
   end else begin
-   e5month:=Copy(e5month,1, length(e5month)-1);
-   if fl>1 then e5month:='['+e5month+']';
+   e5month:='['+Copy(e5month,1, length(e5month)-1)+']';
   end;
 
 
@@ -411,14 +421,13 @@ begin
     if cgDay.Checked[k]=true then begin
      dd_str:=cgDay.Items.Strings[k];
      if length(dd_str)<2 then dd_str:='0'+dd_str;
-      e5day:=e5day+QuotedStr(dd_str)+',';
+      e5day:=e5day+AnsiQuotedStr(dd_str, '"')+',';
       inc(fl);
   end;
   if fl=0 then begin
    if MessageDlg(SSelectDay, mtWarning, [mbOk], 0)=mrOk then exit;
   end else begin
-   e5day:=Copy(e5day,1, length(e5day)-1);
-     if fl>1 then e5day:='['+e5day+']';
+   e5day:='['+Copy(e5day,1, length(e5day)-1)+']';
   end;
 
 
@@ -426,14 +435,13 @@ begin
   e5hour:=''; fl:=0;
   for k:=0 to cgTime.Items.Count-1 do
     if cgTime.Checked[k]=true then begin
-      e5hour:=e5hour+QuotedStr(cgTime.Items.Strings[k])+',';
+      e5hour:=e5hour+AnsiQuotedStr(cgTime.Items.Strings[k], '"')+',';
       inc(fl);
   end;
   if fl=0 then begin
    if MessageDlg(SSelectHour, mtWarning, [mbOk], 0)=mrOk then exit;
   end else begin
-   e5hour:=Copy(e5hour,1, length(e5hour)-1);
-   if fl>1 then e5hour:='['+e5hour+']';
+   e5hour:='['+Copy(e5hour,1, length(e5hour)-1)+']';
   end;
 
 
@@ -444,36 +452,44 @@ begin
   grid_str:=rgGrid.Items.Strings[rgGrid.ItemIndex];
   e5grid:='['+grid_str+' ,'+grid_str+']';
 
+  // output file
+  path_out := TrimFilename(ERA5Path+PathDelim+FormatDateTime('YYYYMMDD_hhnnss', now)+'.nc');
+  path_out := StringReplace(path_out, '\', '\\', [rfReplaceAll]);
 
+
+  //Combining final script
+   final_script:=
+   'import cdsapi'+LineEnding+LineEnding+
+   'dataset = '+AnsiQuotedStr(e5reanalysis, '"')+LineEnding+LineEnding+
+   'request = {'+LineEnding+
+   '        '+AnsiQuotedStr('product_type', '"')+':'+e5product+','+LineEnding+
+   '        '+AnsiQuotedStr('variable', '"')+':'+e5variable+','+LineEnding;
+
+  if cgLevel.Enabled=true then
+   final_script:=final_script+
+   '        '+AnsiQuotedStr('pressure_level', '"')+':'+e5level+','+LineEnding;
+
+   final_script:=final_script+
+   '        '+AnsiQuotedStr('year', '"')+':'+e5year+','+LineEnding+
+   '        '+AnsiQuotedStr('month', '"')+':'+e5month+','+LineEnding;
+
+  if cgDay.Enabled=true then
+   final_script:=final_script+
+   '        '+AnsiQuotedStr('day', '"')+':'+e5day+','+LineEnding;
+
+  final_script:=final_script+
+   '        '+AnsiQuotedStr('time', '"')+':'+e5hour+','+LineEnding+
+   '        '+AnsiQuotedStr('area', '"')+':'+e5area+','+LineEnding+
+   '        '+AnsiQuotedStr('grid', '"')+':'+e5grid+','+LineEnding+
+   '        '+AnsiQuotedStr('data_format', '"')+':'+AnsiQuotedStr('netcdf_legacy', '"')+','+LineEnding+
+   '        '+AnsiQuotedStr('download_format', '"')+':'+AnsiQuotedStr('unarchived', '"')+LineEnding+
+   '        }'+LineEnding+LineEnding+
+   'client = cdsapi.Client(url='+AnsiQuotedStr(stURL, '"')+', key='+AnsiQuotedStr(stKEY, '"')+')'+LineEnding+
+   'client.retrieve(dataset, request, '+QuotedStr(path_out)+')';
+
+  // writing Python script
   AssignFile(dat, ERA5Path+'getera5.py'); rewrite(dat);
-   writeln(dat, 'import subprocess');
-   writeln(dat, 'import sys');
-   writeln(dat, '');
-   writeln(dat, 'try:');
-   writeln(dat, '    import cdsapi');
-   writeln(dat, 'except ImportError:');
-   writeln(dat, '    subprocess.call([sys.executable, "-m", "pip", "install", "cdsapi"])');
-   writeln(dat, '    import cdsapi');
-   writeln(dat, '');
-   writeln(dat, 'c = cdsapi.Client()');
-   writeln(dat, '');
-   writeln(dat, 'c.retrieve(');
-   writeln(dat, '    '+e5reanalysis+',');
-   writeln(dat, '    {');
-   writeln(dat, '        '+QuotedStr('product_type')+':'+e5product+',');
-   writeln(dat, '        '+QuotedStr('format')+':'+QuotedStr('netcdf')+',');
-   writeln(dat, '        '+QuotedStr('variable')+':'+e5variable+',');
-   if cgLevel.Enabled=true then
-   writeln(dat, '        '+QuotedStr('pressure_level')+':'+e5level+',');
-   writeln(dat, '        '+QuotedStr('year')+':'+e5year+',');
-   writeln(dat, '        '+QuotedStr('month')+':'+e5month+',');
-   if cgDay.Enabled=true then
-   writeln(dat, '        '+QuotedStr('day')+':'+e5day+',');
-   writeln(dat, '        '+QuotedStr('time')+':'+e5hour+',');
-   writeln(dat, '        '+QuotedStr('area')+':'+e5area+',');
-   writeln(dat, '        '+QuotedStr('grid')+':'+e5grid);
-   writeln(dat, '    },');
-   writeln(dat, '    '+QuotedStr(ERA5Path+'download.nc')+')');
+  writeln(dat, final_script);
   CloseFile(dat);
 end;
 
@@ -495,7 +511,7 @@ begin
   mLog.Clear;
   ERA5GetScript;
 
-    RunScript(1, ERA5Path+'getera5.py', mLog);
+  RunScript(1, ERA5Path+'getera5.py', mLog);
   OpenDocument(ERA5Path);
 end;
 
@@ -527,7 +543,7 @@ begin
         WaitOnExit:=false;
      end;
      1: begin
-        ExeName:=Ini.ReadString('main', 'PythonPath', '');
+        ExeName:=GlobalPath+PathDelim+'python'+PathDelim+'python.exe';
         WaitOnExit:=false;
         if not FileExists(ExeName) then
            if Messagedlg(SNoPython, mtwarning, [mbOk], 0)=mrOk then exit;
